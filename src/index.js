@@ -6,5 +6,6 @@ window.onload = async () => {
         head.appendChild(element)
     }
     await load();
+    await Core.init();
     main();
 }

@@ -1,4 +1,4 @@
-_importedJsonDatas.push(
+_importedJsonDatas.asset_index = (
     [
         //assets
     ]

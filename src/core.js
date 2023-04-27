@@ -6,7 +6,7 @@ const Core = {
         Audios: {},
         loadAssets: async function () {
             let promises = [];
-            let index = await import("../assets/index.json")
+            let index = await importJson("./assets/index.json", "asset_index")
             index.forEach((element) => {
                 let promise = new Promise((resolve) => {
                     switch (element.type) {
