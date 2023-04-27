@@ -1,29 +1,42 @@
+let _importedJsonDatas = {};
+let _importedJsFiles = { "./src/index.js": true, };
+
 function importJs(src) {
-    const head = document.getElementsByTagName("head")[0];
-    let element = document.createElement("script");
-    element.rc = src;
-    head.appendChild(element);
-    alert(src);
+    if (!_importedJsFiles[src]) {
+        return new Promise((resolve, reject) => {
+            const head = document.getElementsByTagName("head")[0];
+            let element = document.createElement("script");
+            element.src = src;
+            head.appendChild(element)
+            element.onload = () => {
+                _importedJsFiles[src] = true;
+                resolve()
+            }
+            element.onerror = (e) => reject(e);
+        })
+    }
 }
 
-async function importJson(src) {
-    let request = new XMLHttpRequest();
-    request.open("json", src);
-    request.responseType = "json";
-    request.send();
-    return (() => {
-        return request.onload = () => {
-            let data = request.response;
-            data = JSON.parse(JSON.stringify(data));
-            return data
-        }
-    })();
+function importJson(src, name) {
+    return new Promise((resolve, reject) => {
+        const head = document.getElementsByTagName("head")[0];
+        let element = document.createElement("script");
+        element.src = src + ".js";
+        head.appendChild(element);
+        element.onload = () => {
+            element.remove();
+            let data = _importedJsonDatas[name];
+            delete _importedJsonDatas[name];
+            resolve(data);
+        };
+        element.onerror = (e) => reject(e);
+    })
 }
 
 async function load() {
-    let a = await importJson("../index.json")
+    let a = await importJson("./index.json", "index");
     let promises = [];
-    a.forEach((element) => {
+    a.forEach((e) => {
         promises.push(importJs(e));
     });
     await Promise.all(promises)

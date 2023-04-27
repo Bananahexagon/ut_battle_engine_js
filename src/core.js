@@ -27,7 +27,7 @@ const Core = {
                             }
                             break;
                         case "data":
-                            importJs(element.src);
+                            importJson(element.src);
                             break;
                     };
                 });
