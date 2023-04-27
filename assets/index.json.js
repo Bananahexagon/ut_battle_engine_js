@@ -1,5 +1,5 @@
 _importedJsonDatas.asset_index = (
     [
-        //assets
+        { name: "soul", src: "./assets/image/soul.png" }
     ]
 )
