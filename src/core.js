@@ -41,7 +41,7 @@ const Core = {
         this.canvas.width = 640;
         this.Asset.loadAssets();
     },
-    stamp: function (costume, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw, sh) {
+    stamp: function (costume, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
         let image = Core.Asset.Images[costume];
         let sw2 = sw == undefined ? sw : image.width;
         let sh2 = sh == undefined ? sh : image.heigth;

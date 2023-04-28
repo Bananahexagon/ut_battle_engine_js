@@ -1,3 +1,3 @@
 function main() {
-    Core.ctx.drawImage(Core.Asset.Images.soul, 0, 0)
+    Core.stamp("soul", 0, 0, 200)
 }
