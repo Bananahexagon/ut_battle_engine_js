@@ -40,5 +40,11 @@ const Core = {
         this.canvas.height = 480;
         this.canvas.width = 640;
         this.Asset.loadAssets();
+    },
+    stamp: function (costume, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw, sh) {
+        let image = Core.Asset.Images[costume];
+        let sw2 = sw == undefined ? sw : image.width;
+        let sh2 = sh == undefined ? sh : image.heigth;
+        Core.ctx.drawImage(image, sx, sy, sw2, sh2, dx, dy, image.width * size / 100, image.height * size / 100);
     }
 };
