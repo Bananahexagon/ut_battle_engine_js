@@ -39,12 +39,16 @@ const Core = {
     init: async function () {
         this.canvas.height = 480;
         this.canvas.width = 640;
-        this.Asset.loadAssets();
+        this.ctx.mozImageSmoothingEnabled = false;
+        this.ctx.webkitImageSmoothingEnabled = false;
+        this.ctx.msImageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = false;
+        await this.Asset.loadAssets();
     },
-    stamp: function (costume, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
-        let image = this.Asset.Images[costume];
-        let sw2 = sw == undefined ? sw : image.width;
-        let sh2 = sh == undefined ? sh : image.heigth;
-        this.ctx.drawImage(image, sx, sy, sw2, sh2, dx, dy, image.width * size * wh / 100, image.height * size / 100);
+    stamp: function (name, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
+        let costume = this.Asset.Images[name];
+        let sw2 = sw != undefined ? sw : costume.naturalWidth;
+        let sh2 = sh != undefined ? sh : costume.naturalHeigth;
+        this.ctx.drawImage(costume, sx, sy, sw2, sh2, dx, dy, costume.naturalWidth * size * wh / 100, costume.naturalHeigth * size / 100);
     }
 };

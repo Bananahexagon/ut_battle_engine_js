@@ -43,4 +43,5 @@ async function load() {
         promises.push(importJs(e));
     });
     await Promise.all(promises)
+    
 }
