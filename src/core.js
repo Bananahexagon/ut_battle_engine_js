@@ -43,6 +43,7 @@ const Core = {
         this.ctx.webkitImageSmoothingEnabled = false;
         this.ctx.msImageSmoothingEnabled = false;
         this.ctx.imageSmoothingEnabled = false;
+
         await this.Asset.loadAssets();
     },
     stamp: function (name, dx, dy, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
