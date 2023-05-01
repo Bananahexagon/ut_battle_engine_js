@@ -128,4 +128,4 @@ const Game = {
     settings: {},
 }
 
-let Vars = {}
+let Global = {}
