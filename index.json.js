@@ -1,8 +1,7 @@
 _importedJsonDatas.index =
     [
         "./src/index.js",
-        "./src/input.js",
         "./src/roader.js",
-        "./src/core.js",
+        "./src/init.js",
         "./src/main.js",
     ]
