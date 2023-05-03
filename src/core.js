@@ -112,13 +112,15 @@ const Core = {
         c: false,
     },
     stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
-        let costume = this.Asset.Images[name];
-        let sw2 = sw != undefined ? sw : costume.width;
-        let sh2 = sh != undefined ? sh : costume.height;
+        const costume = this.Asset.Images[name];
+        const sw2 = sw != undefined ? sw : costume.width;
+        const sh2 = sh != undefined ? sh : costume.height;
+        const width = sw2 - sx;
+        const height = sh2 - sy;
         this.ctx.save();
         this.ctx.translate(dx, dy);
         this.ctx.rotate(dd * Math.PI / 180);
-        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -costume.width * wh * size / 200 , -costume.height * size / 200, costume.width * size * wh / 100, costume.height * size / 100);
+        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -width * size * wh / 200, -height * size / 200, width * size * wh / 100, height * size / 100);
         this.ctx.restore();
     }
 };
