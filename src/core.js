@@ -113,20 +113,19 @@ const Core = {
     },
     stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
         const costume = this.Asset.Images[name];
-        const sw2 = sw != undefined ? sw : costume.width;
-        const sh2 = sh != undefined ? sh : costume.height;
-        const width = sw2 - sx;
-        const height = sh2 - sy;
+        const sw2 = sw != undefined ? sw : costume.width - sx;
+        const sh2 = sh != undefined ? sh : costume.height - sy;
         this.ctx.save();
         this.ctx.translate(dx, dy);
         this.ctx.rotate(dd * Math.PI / 180);
-        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -width * size * wh / 200, -height * size / 200, width * size * wh / 100, height * size / 100);
+        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -sw2 * size * wh / 200, -sh2 * size / 200, sw2 * size * wh / 100, sh2 * size / 100);
         this.ctx.restore();
     }
 };
 
 const Game = {
     player: { x: 0, y: 0 },
+    timer: 0,
     settings: {},
 }
 

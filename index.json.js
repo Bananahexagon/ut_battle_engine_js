@@ -4,4 +4,5 @@ _importedJsonDatas.index =
         "./src/roader.js",
         "./src/core.js",
         "./src/main.js",
+        "./src/font.js",
     ]
