@@ -1,4 +1,4 @@
-_importedJsonDatas.asset_index = (
+_importedJsonData.assetIndex = (
     [
         { type: "data", name: "", src: "./assets/data/font_data.json" },
         { type: "image", name: "soul", src: "./assets/image/soul.png" },

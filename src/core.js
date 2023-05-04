@@ -6,7 +6,7 @@ const Core = {
         Audios: {},
         loadAssets: async function () {
             let promises = [];
-            let index = await importJson("./assets/index.json", "asset_index")
+            let index = await importJson("./assets/index.json", "assetIndex", true)
             index.forEach((element) => {
                 let promise = new Promise((resolve) => {
                     switch (element.type) {
@@ -27,7 +27,7 @@ const Core = {
                             }
                             break;
                         case "data":
-                            importJson(element.src);
+                            importJson(element.src, element.name)
                             break;
                     };
                 });

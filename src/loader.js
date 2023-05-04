@@ -1,7 +1,7 @@
-let _importedJsonDatas = {};
+let _importedJsonData = {};
 let _importedJsFiles = {
     "./src/index.js": true,
-    "./src/roader.js": true,
+    "./src/loader.js": true,
 };
 
 function importJs(src) {
@@ -13,14 +13,14 @@ function importJs(src) {
             head.appendChild(element)
             element.onload = () => {
                 _importedJsFiles[src] = true;
-                resolve()
+                resolve(element)
             }
             element.onerror = (e) => reject(e);
         })
     }
 }
 
-function importJson(src, name) {
+function importJson(src, name, opt = false) {
     return new Promise((resolve, reject) => {
         const head = document.getElementsByTagName("head")[0];
         let element = document.createElement("script");
@@ -28,20 +28,27 @@ function importJson(src, name) {
         head.appendChild(element);
         element.onload = () => {
             element.remove();
-            let data = _importedJsonDatas[name];
-            delete _importedJsonDatas[name];
+            let data = opt ? readJsonData(name) : _importedJsonData[name];
             resolve(data);
         };
         element.onerror = (e) => reject(e);
     })
 }
 
+function readJsonData(name) {
+    return (() => {
+        let data = _importedJsonData[name];
+        delete _importedJsonData[name];
+        return data
+    })()
+}
+
 async function load() {
-    let a = await importJson("./index.json", "index");
+    let a = await importJson("./index.json", "index",true);
     let promises = [];
     a.forEach((e) => {
         promises.push(importJs(e));
     });
     await Promise.all(promises)
-    
+
 }
