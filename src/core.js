@@ -10,7 +10,7 @@ const Core = {
             let promises = [];
             let index = await importJson("./assets/index.json", "assetIndex", true)
             index.forEach((element) => {
-                let promise = new Promise((resolve) => {
+                promises.push(new Promise((resolve) => {
                     switch (element.type) {
                         case "image":
                             let image = new Image();
@@ -29,11 +29,12 @@ const Core = {
                             }
                             break;
                         case "data":
-                            importJson(element.src, element.name)
+                            importJson(element.src, element.name).then(() => {
+                                resolve();
+                            })
                             break;
                     };
-                });
-                promises.push(promise);
+                }));
             });
             await Promise.all(promises);
         },
@@ -103,6 +104,8 @@ const Core = {
         });
 
         await this.Asset.loadAssets();
+
+        Game.init();
     },
     inputKeys: {
         up: false,
