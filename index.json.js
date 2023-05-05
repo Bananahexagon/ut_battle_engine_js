@@ -1,3 +1,5 @@
+"use strict"
+
 _importedJsonData.index =
     [
         "./src/index.js",

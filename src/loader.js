@@ -1,3 +1,5 @@
+"use strict"
+
 let _importedJsonData = {};
 let _importedJsFiles = {
     "./src/index.js": true,
@@ -36,11 +38,9 @@ function importJson(src, name, opt = false) {
 }
 
 function readJsonData(name) {
-    return (() => {
-        let data = _importedJsonData[name];
-        delete _importedJsonData[name];
-        return data
-    })()
+    let data = structuredClone(_importedJsonData[name]);
+    delete _importedJsonData[name];
+    return data
 }
 
 async function load() {

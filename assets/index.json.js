@@ -1,6 +1,8 @@
+"use strict"
+
 _importedJsonData.assetIndex = (
     [
-        { type: "data", name: "", src: "./assets/data/font_data.json" },
+        { type: "data", name: "fontDataEn", src: "./assets/data/font_data_en.json" },
         { type: "image", name: "soul", src: "./assets/image/soul.png" },
         { type: "image", name: "sans", src: "./assets/image/sans.png" },
         { type: "image", name: "determination_white", src: "./assets/image/determination_white.png" },

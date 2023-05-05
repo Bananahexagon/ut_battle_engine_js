@@ -1,3 +1,5 @@
+"use strict"
+
 const Core = {
     canvas: document.getElementById("canvas"),
     ctx: this.canvas.getContext("2d"),
@@ -127,6 +129,9 @@ const Game = {
     player: { x: 0, y: 0 },
     timer: 0,
     settings: {},
+    init: () => {
+        Global.fontData = readJsonData("fontDataEn");
+    }
 }
 
 let Global = {}

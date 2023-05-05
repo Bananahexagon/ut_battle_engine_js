@@ -1,4 +1,6 @@
-_importedJsonData.fontData = {
+"use strict"
+
+_importedJsonData.fontDataEn = {
     0: { left: 0, up: 18, width: 6, height: 9, gap: 0 },
     1: { left: 10, up: 18, width: 6, height: 9, gap: 0 },
     2: { left: 20, up: 18, width: 6, height: 9, gap: 0 },
