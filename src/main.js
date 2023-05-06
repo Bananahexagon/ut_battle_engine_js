@@ -9,4 +9,5 @@ function update() {
     if (Core.inputKeys.down) Game.player.y += 5;
     if (Core.inputKeys.left) Game.player.x -= 5;
     if (Core.inputKeys.right) Game.player.x += 5;
+    Game.timer++;
 }
