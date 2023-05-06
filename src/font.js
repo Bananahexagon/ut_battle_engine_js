@@ -1,29 +1,42 @@
 "use strict"
 
-async function font(input) {
-    const started_time = Global.timer;
-    let timer = 0;
-    let length_allow = 0;
-    let data = {
-        size: input.size,
-        x: input.x,
-        y: input.y,
-        direction: input.d,
-        spacing_x: input.spacing_x,
-        spacing_y: input.spacing_y,
-        color: input.color,
-        string: "",
+function fontEach() {
+    for (let input in Global.Strings) {
+        let length_allow = 0;
+        if (length_allow == input.string.length && Core.inputKeys.z) {
+            return (()=>{
+                delete Global.Strings.input
+            })()
+        } else if (Core.inputKeys.x) {
+            length_allow = input.string.length
+        } else {
+            length_allow += 1 / input.speed;
+        }
+        while (input.string_now.length < Math.min(length_allow, input.string.length)) {
+            input.string_now += input.string[input.string_now];
+        };
     };
 };
 
-function writeFrame(input) {
+function writePlane(input) {
     const chars = input.string;
     const size = input.size;
     const d = input.direction * Math.PI / 180;
     let x, y;
     [x, y] = [0, 0];
+    const charDataf = ((c) => {
+        switch (c) {
+            case "\n":
+            case " ":
+                return Global.fontData.space;
+            case Global.fontData[c] === undefined:
+                return Global.fontData.irregular;
+            default:
+                return Global.fontData[c];
+        }
+    })
     for (let i = 0; i < chars.length; i++) {
-        const charData = Global.fontData[chars[i]] ? Global.fontData[chars[i]] : Global.fontData["irregular"];
+        const charData = charDataf(chars[i])
         if (chars[i] == "\n") {
             x = 0;
             y += 15 + input.spacing_y;
@@ -33,7 +46,7 @@ function writeFrame(input) {
                 input.y + (Math.sin(d) * x - Math.cos(d) * (y - charData.gap / 2)) * size / 100,
                 input.direction, size, 1, charData.left, charData.up, charData.width, charData.height
             );
-            if (i + 1 < chars.length) x += (charData.width + Global.fontData[chars[i + 1]].width)/2 + 2 + input.spacing_x;
+            if (i + 1 < chars.length) x += (charData.width + charDataf(chars[i + 1]).width) / 2 + 2 + input.spacing_x;
         };
     };
 };

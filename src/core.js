@@ -137,4 +137,6 @@ const Game = {
     }
 }
 
-let Global = {}
+let Global = {
+    Strings: {}
+}
