@@ -14,20 +14,6 @@ async function font(input) {
         color: input.color,
         string: "",
     };
-    while (true) {
-        if (timer != Global.timer) {
-            if (Core.inputKeys.x) {
-                length_allow = input.string.length
-            } else {
-                length_allow += 1 / input.speed;
-            }
-            while (data.string.length < Math.max(length_allow, input.string.length)) {
-                data.string += input.string[data.string.length];
-            };
-            writeFrame(data);
-        };
-        timer = Global.timer;
-    };
 };
 
 function writeFrame(input) {
@@ -37,17 +23,17 @@ function writeFrame(input) {
     let x, y;
     [x, y] = [0, 0];
     for (let i = 0; i < chars.length; i++) {
-        const charData = Global.fontData[chars[i]];
+        const charData = Global.fontData[chars[i]] ? Global.fontData[chars[i]] : Global.fontData["irregular"];
         if (chars[i] == "\n") {
             x = 0;
             y += 15 + input.spacing_y;
         } else {
-            Core.stamp("determination_" + !input.color ? white : input.color,
+            Core.stamp("determination_" + (!input.color ? "white" : input.color),
                 input.x + (Math.cos(d) * x + Math.sin(d) * y) * size / 100,
-                input.y + (Math.sin(d) * x - Math.cos(d) * (y + charData.gap) / 2) * size / 100,
+                input.y + (Math.sin(d) * x - Math.cos(d) * (y - charData.gap / 2)) * size / 100,
                 input.direction, size, 1, charData.left, charData.up, charData.width, charData.height
             );
-            x += charData.width + 2 + input.spacing_x;
+            if (i + 1 < chars.length) x += (charData.width + Global.fontData[chars[i + 1]].width)/2 + 2 + input.spacing_x;
         };
     };
 };
