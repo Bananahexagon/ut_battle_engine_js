@@ -1,5 +1,5 @@
 class Font {
-    constructor(str, x, y, d, size, color, spacing_x, spacing_y, speed) {
+    constructor(str:string, x:number, y:number, d:number, size:number, color, spacing_x, spacing_y, speed) {
         this.str = str;
         this.x = x;
         this.y = y;
