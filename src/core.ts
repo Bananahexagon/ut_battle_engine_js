@@ -1,5 +1,3 @@
-"use strict"
-
 const Core = {
     canvas: document.getElementById("canvas"),
     ctx: this.canvas.getContext("2d"),

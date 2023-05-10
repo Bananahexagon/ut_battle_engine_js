@@ -1,5 +1,3 @@
-"use strict"
-
 function main() {
     Game.timer = 0;
     window.requestAnimationFrame(update);

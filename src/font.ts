@@ -1,5 +1,3 @@
-"use strict"
-
 class Font {
     constructor(str, x, y, d, size, color, spacing_x, spacing_y, speed) {
         this.str = str;
