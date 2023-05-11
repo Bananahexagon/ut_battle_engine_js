@@ -1,5 +1,16 @@
+import { Core, Global } from "./core";
+
 class Font {
-    constructor(str:string, x:number, y:number, d:number, size:number, color, spacing_x, spacing_y, speed) {
+    str: string;
+    x: number;
+    y: number;
+    direction: number;
+    size: number;
+    color: string;
+    spacing_x: number;
+    spacing_y: number;
+    speed: number;
+    constructor(name: string, str: string, x: number, y: number, d: number, size: number, color: string, spacing_x: number, spacing_y: number, speed: number) {
         this.str = str;
         this.x = x;
         this.y = y;
@@ -9,6 +20,7 @@ class Font {
         this.spacing_x = spacing_x;
         this.spacing_y = spacing_y;
         this.speed = speed;
+        Global.DisplayStrings[name] = this;
     }
     writeObject() {
 
@@ -20,15 +32,13 @@ class Font {
         const d = this.direction * Math.PI / 180;
         let x, y;
         [x, y] = [0, 0];
-        const charDataf = ((c) => {
-            switch (c) {
-                case "\n":
-                case " ":
-                    return Global.fontData.space;
-                case Global.fontData[c] === undefined:
-                    return Global.fontData.irregular;
-                default:
-                    return Global.fontData[c];
+        const charDataf = ((c: string) => {
+            if (c == "\n" || c == " ") {
+                return Global.fontData.space;
+            } else if (Global.fontData[c] == void 0) {
+                return Global.fontData.space;
+            } else {
+                return Global.fontData[c];
             }
         })
         for (let i = 0; i < chars.length; i++) {
@@ -49,7 +59,8 @@ class Font {
 }
 
 function fontForEach() {
-    for (let input in Global.Strings) {
+    for (let name in Global.DisplayStrings) {
+        const input = Global.DisplayStrings[name]
         if (input.length_allow == input.string.length && Core.inputKeys.z) {
             return (() => {
                 delete Global.Strings.input
@@ -65,11 +76,4 @@ function fontForEach() {
     };
 };
 
-writePlane({
-    str: "MEGALOAPPLE",
-    size: 200,
-    x: 0,
-    y: 0,
-    direction: 30,
-    color: "white",
-})
+export { Font, fontForEach }

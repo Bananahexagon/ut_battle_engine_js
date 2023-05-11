@@ -1,7 +1,16 @@
+import { Core, Game, Global } from "./core";
+import { Font, fontForEach } from "./font";
+
+window.onload = async () => {
+    await Core.init();
+    main();
+}
+
 function main() {
     Game.timer = 0;
     window.requestAnimationFrame(update);
 }
+
 function update() {
     if (Core.inputKeys.up) Game.player.y -= 5;
     if (Core.inputKeys.down) Game.player.y += 5;
@@ -11,3 +20,5 @@ function update() {
     fontForEach();
     window.requestAnimationFrame(update);
 }
+
+export { main }

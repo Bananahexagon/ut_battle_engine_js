@@ -1,13 +1,47 @@
-const Core = {
-    canvas: document.getElementById("canvas"),
-    ctx: this.canvas.getContext("2d"),
-    Asset: {
+type CoreT = {
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    Assets: Assets,
+    init: () => {},
+    inputKeys: {
+        up: boolean,
+        down: boolean,
+        left: boolean,
+        right: boolean,
+        z: boolean,
+        x: boolean,
+        c: boolean,
+    },
+    stamp: (name: string, dx: number, dy: number, dd:number, size:number, wh:number, sx:number, sy:number, sw:number | undefined, sh:number | undefined) => void,
+}
+
+
+
+type Assets = {
+    Images: {[index: string]: HTMLImageElement},
+    Audios: {[index: string]: HTMLAudioElement},
+    Datas: {[index: string]: any},
+    loadAssets: ()=>{},
+}
+
+let a = (document.getElementById("canvas") as HTMLCanvasElement).getContext("2d");
+
+const Core: CoreT = {
+    canvas: document.getElementById("canvas") as HTMLCanvasElement,
+    ctx: (this as unknown as CoreT).canvas.getContext("2d")!,
+    Assets: {
         Images: {},
         Audios: {},
+        Datas: {},
         loadAssets: async function () {
-            let promises = [];
-            let index = await importJson("./assets/index.json", "assetIndex", true)
-            index.forEach((element) => {
+            type Asset = {
+                type: string,
+                name: string,
+                src: string,
+            };
+            let promises: Promise<void>[] = [];
+            let index = await require("./assets/index.json")
+            index.forEach((element: Asset) => {
                 promises.push(new Promise((resolve) => {
                     switch (element.type) {
                         case "image":
@@ -27,9 +61,7 @@ const Core = {
                             }
                             break;
                         case "data":
-                            importJson(element.src, element.name).then(() => {
-                                resolve();
-                            })
+                            this.Datas[element.name] = require(element.src);
                             break;
                     };
                 }));
@@ -40,9 +72,7 @@ const Core = {
     init: async function () {
         this.canvas.height = 480;
         this.canvas.width = 640;
-        this.ctx.mozImageSmoothingEnabled = false;
-        this.ctx.webkitImageSmoothingEnabled = false;
-        this.ctx.msImageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = false;
         this.ctx.imageSmoothingEnabled = false;
 
         window.addEventListener("keydown", e => {
@@ -101,7 +131,7 @@ const Core = {
             }
         });
 
-        await this.Asset.loadAssets();
+        await this.Assets.loadAssets();
 
         Game.init();
     },
@@ -114,8 +144,8 @@ const Core = {
         x: false,
         c: false,
     },
-    stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
-        const costume = this.Asset.Images[name];
+    stamp: function (name: string, dx: number, dy: number, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
+        const costume = this.Assets.Images[name];
         const sw2 = sw != undefined ? sw : costume.width - sx;
         const sh2 = sh != undefined ? sh : costume.height - sy;
         this.ctx.save();
@@ -131,10 +161,14 @@ const Game = {
     timer: 0,
     settings: {},
     init: () => {
-        Global.fontData = readJsonData("fontDataEn");
+        Global.fontData = Core.Assets.Datas.fontData
     }
 }
 
-let Global = {
-    Strings: {}
+let Global: {
+    [index: string]: any
+} = {
+    DisplayStrings: {}
 }
+
+export { Core, Game, Global };
