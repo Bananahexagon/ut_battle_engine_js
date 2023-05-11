@@ -138,5 +138,5 @@ const Game = {
 }
 
 let Global = {
-    Strings: {}
+    displayStrings: {}
 }

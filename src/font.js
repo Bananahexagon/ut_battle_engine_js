@@ -1,52 +1,62 @@
 "use strict"
-
-function fontEach() {
-    for (let input in Global.Strings) {
-        let length_allow = 0;
-        if (length_allow == input.string.length && Core.inputKeys.z) {
-            return (()=>{
-                delete Global.Strings.input
-            })()
-        } else if (Core.inputKeys.x) {
-            length_allow = input.string.length
-        } else {
-            length_allow += 1 / input.speed;
-        }
-        while (input.string_now.length < Math.min(length_allow, input.string.length)) {
-            input.string_now += input.string[input.string_now];
+class Font {
+    constructor(name, str, x, y, d, size, color, spacing_x, spacing_y, speed) {
+        this.str = str;
+        this.x = x;
+        this.y = y;
+        this.direction = d;
+        this.size = size;
+        this.color = color;
+        this.spacing_x = spacing_x;
+        this.spacing_y = spacing_y;
+        this.speed = speed;
+        Global.displayStrings[name] = this;
+    }
+    write() {
+        const chars = this.str;
+        const size = this.size;
+        const d = this.direction * Math.PI / 180;
+        let x, y;
+        [x, y] = [0, 0];
+        const charDataf = ((c) => {
+            if (c == "\n" || c == " ") {
+                return Global.fontData.space;
+            } else if (Global.fontData[c] == void 0) {
+                return Global.fontData.space;
+            } else {
+                return Global.fontData[c];
+            }
+        })
+        for (let i = 0; i < chars.length; i++) {
+            const charData = charDataf(chars[i])
+            if (chars[i] == "\n") {
+                x = 0;
+                y += 15 + this.spacing_y;
+            } else {
+                Core.stamp("determination_" + (!this.color ? "white" : this.color),
+                    this.x + (Math.cos(d) * x + Math.sin(d) * y) * size / 100,
+                    this.y + (Math.sin(d) * x - Math.cos(d) * (y - charData.gap / 2)) * size / 100,
+                    this.direction, size, 1, charData.left, charData.up, charData.width, charData.height
+                );
+                if (i + 1 < chars.length) x += (charData.width + charDataf(chars[i + 1]).width) / 2 + 2 + this.spacing_x;
+            };
         };
     };
 };
 
-function writePlane(input) {
-    const chars = input.string;
-    const size = input.size;
-    const d = input.direction * Math.PI / 180;
-    let x, y;
-    [x, y] = [0, 0];
-    const charDataf = ((c) => {
-        switch (c) {
-            case "\n":
-            case " ":
-                return Global.fontData.space;
-            case Global.fontData[c] === undefined:
-                return Global.fontData.irregular;
-            default:
-                return Global.fontData[c];
-        }
-    })
-    for (let i = 0; i < chars.length; i++) {
-        const charData = charDataf(chars[i])
-        if (chars[i] == "\n") {
-            x = 0;
-            y += 15 + input.spacing_y;
+function fontForEach() {
+    for (let name in Global.displayStrings) {
+        const input = Global.displayStrings[name];
+        if (input.length_allow == input.str.length && Core.inputKeys.z) {
+            delete Global.displayStrings[name];
+            continue;
+        } else if (Core.inputKeys.x) {
+            input.length_allow = input.str.length
         } else {
-            Core.stamp("determination_" + (!input.color ? "white" : input.color),
-                input.x + (Math.cos(d) * x + Math.sin(d) * y) * size / 100,
-                input.y + (Math.sin(d) * x - Math.cos(d) * (y - charData.gap / 2)) * size / 100,
-                input.direction, size, 1, charData.left, charData.up, charData.width, charData.height
-            );
-            if (i + 1 < chars.length) x += (charData.width + charDataf(chars[i + 1]).width) / 2 + 2 + input.spacing_x;
+            input.length_allow += 1 / input.speed;
+        }
+        while (input.str_now.length < Math.min(input.length_allow, input.str.length)) {
+            input.str_now += input.str[input.str_now];
         };
     };
 };
