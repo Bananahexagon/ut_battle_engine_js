@@ -1,6 +1,8 @@
 "use strict"
 class Font {
     constructor(name, str, x, y, d, size, color, spacing_x, spacing_y, speed) {
+        this.str_now = "";
+        this.length_allow = 0;
         this.str = str;
         this.x = x;
         this.y = y;
@@ -11,9 +13,10 @@ class Font {
         this.spacing_y = spacing_y;
         this.speed = speed;
         Global.displayStrings[name] = this;
+        fontEveryFrame(name);
     }
     write() {
-        const chars = this.str;
+        const chars = this.str_now;
         const size = this.size;
         const d = this.direction * Math.PI / 180;
         let x, y;
@@ -46,17 +49,22 @@ class Font {
 
 function fontForEach() {
     for (let name in Global.displayStrings) {
-        const input = Global.displayStrings[name];
+        fontEveryFrame(name);
+    };
+};
+
+function fontEveryFrame(name) {
+    const input = Global.displayStrings[name];
         if (input.length_allow == input.str.length && Core.inputKeys.z) {
             delete Global.displayStrings[name];
-            continue;
+            return;
         } else if (Core.inputKeys.x) {
             input.length_allow = input.str.length
-        } else {
+        } else if (input.length_allow < input.str.length) {
             input.length_allow += 1 / input.speed;
         }
         while (input.str_now.length < Math.min(input.length_allow, input.str.length)) {
-            input.str_now += input.str[input.str_now];
+            input.str_now += input.str[input.str_now.length];
+            console.log(input.length_allow, input.str.length)
         };
-    };
-};
+}
