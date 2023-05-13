@@ -40,8 +40,8 @@ const Core = {
         },
     },
     init: async function () {
-        this.canvas.height = 480;
-        this.canvas.width = 640;
+        this.canvas.height = 960;
+        this.canvas.width = 1280;
         this.ctx.mozImageSmoothingEnabled = false;
         this.ctx.webkitImageSmoothingEnabled = false;
         this.ctx.msImageSmoothingEnabled = false;
@@ -121,9 +121,9 @@ const Core = {
         const sw2 = sw != undefined ? sw : costume.width - sx;
         const sh2 = sh != undefined ? sh : costume.height - sy;
         this.ctx.save();
-        this.ctx.translate(dx, dy);
+        this.ctx.translate(dx * 2, dy * 2);
         this.ctx.rotate(dd * Math.PI / 180);
-        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -sw2 * size * wh / 200, -sh2 * size / 200, sw2 * size * wh / 100, sh2 * size / 100);
+        this.ctx.drawImage(costume, sx, sy, sw2, sh2, -sw2 * size * wh / 100, -sh2 * size / 100, sw2 * size * wh / 50, sh2 * size / 50);
         this.ctx.restore();
     }
 };
