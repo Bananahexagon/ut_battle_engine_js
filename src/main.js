@@ -2,7 +2,7 @@
 
 function main() {
     Game.timer = 0;
-    new Font("test", 64, 128, 30, 200, [
+    new FontSuper("test", 64, 128, 30, 200, [
         { str: "Lorem ipsum", color: "white", spacing_x: 0, spacing_y: 0, speed: 2 },
         { str: " dolor\n sit", color: "red", spacing_x: 3, spacing_y: 0, speed: 5 },
         { str: " amet", color: "blue", spacing_x: 17, spacing_y: 0, speed: 15 },

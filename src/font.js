@@ -1,5 +1,5 @@
 "use strict"
-class Font {
+class FontSuper {
     constructor(name, x, y, d, size, input) {
         this._ = {
             all_str: input.reduce((a, c) => a + c.str, ""),
