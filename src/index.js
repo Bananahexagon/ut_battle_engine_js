@@ -49,7 +49,7 @@ function readJsonData(name) {
 }
 
 async function load() {
-    let a = await importJson("./index.json", "index",true);
+    let a = await importJson("./index.json", "index", true);
     let promises = [];
     a.forEach((e) => {
         promises.push(importJs(e));

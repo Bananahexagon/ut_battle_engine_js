@@ -1,6 +1,15 @@
 "use strict"
-class FontSuper {
+class Font {
+    constructor() {}
+    delete() {
+        delete Global.displayStrings[this.name];
+    }
+}
+
+class FontSuper extends Font {
     constructor(name, x, y, d, size, font, input) {
+        super();
+        this.name = name;
         this._ = {
             all_str: input.reduce((a, c) => a + c.str, ""),
             now: [{ str: "", color: input[0].color, spacing_x: input[0].spacing_x, spacing_y: input[0].spacing_y }],
@@ -93,11 +102,13 @@ class FontSuper {
     }
 };
 
-class FontPlane {
+class FontPlane extends Font {
     constructor(name, str, x, y, d, size, color, spacing_x, spacing_y, speed, font) {
+        super();
+        this.name = name;
         this.str_now = "";
         this.length_allow = 0;
-        this.str = str;
+        this.str = str + "";
         this.x = x;
         this.y = y;
         this.direction = d;
@@ -173,3 +184,4 @@ function fontForEach() {
  *    { str: "text", color: "white", spacing_x: 0, spacing_y: 0, speed: 2 },
  *])
  */
+

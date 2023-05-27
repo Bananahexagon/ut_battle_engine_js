@@ -48,7 +48,7 @@ _importedJsonData.fontDataStatus = {
     "d": { left: 24, up: 28, width: 4, height: 5, gap: 0 },
     "e": { left: 30, up: 28, width: 4, height: 5, gap: 0 },
     "f": { left: 36, up: 28, width: 4, height: 5, gap: 0 },
-    "g": { left: 42, up: 28, width: 4, height: 5, gap: 5 },
+    "g": { left: 42, up: 28, width: 4, height: 5, gap: 0 },
     "h": { left: 48, up: 28, width: 4, height: 5, gap: 0 },
     "i": { left: 54, up: 28, width: 4, height: 5, gap: 0 },
     "j": { left: 60, up: 28, width: 4, height: 5, gap: 0 },
@@ -69,7 +69,7 @@ _importedJsonData.fontDataStatus = {
     "y": { left: 54, up: 35, width: 4, height: 5, gap: 0 },
     "z": { left: 60, up: 35, width: 4, height: 5, gap: 0 },
 
-    "space": { left: 0, up: 0, width: 1, height: 1, gap: 0 },
+    "space": { left: 0, up: 0, width: 4, height: 1, gap: 0 },
     "irregular": { left: 90, up: 35, width: 4, height: 5, gap: 0 },
     "!": { left: 6, up: 0, width: 4, height: 5, gap: 0 },
     '"': { left: 12, up: 0, width: 3, height: 2, gap: 0 },
