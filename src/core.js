@@ -116,10 +116,10 @@ const Core = {
         x: false,
         c: false,
     },
-    stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = void 0, sh = void 0) {
+    stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
         const costume = this.Asset.Images[name];
-        const sw2 = sw != void 0 ? sw : costume.width - sx;
-        const sh2 = sh != void 0 ? sh : costume.height - sy;
+        const sw2 = sw != undefined ? sw : costume.width - sx;
+        const sh2 = sh != undefined ? sh : costume.height - sy;
         this.ctx.save();
         this.ctx.translate(dx * 2, dy * 2);
         this.ctx.rotate(dd * Math.PI / 180);
@@ -135,7 +135,7 @@ const Game = {
         lv: 19,
         hp: 92,
         max: 92,
-        name: "mmmmmm",
+        name: "chara",
      },
     timer: 0,
     settings: {},

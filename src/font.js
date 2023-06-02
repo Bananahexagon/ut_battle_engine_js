@@ -44,7 +44,7 @@ class FontSuper extends Font {
         const charDataf = ((c) => {
             if (c == "\n" || c == " ") {
                 return this.font.space;
-            } else if (this.font[c] == void 0) {
+            } else if (this.font[c] === undefined) {
                 return this.font.space;
             } else {
                 return this.font[c];
@@ -89,7 +89,7 @@ class FontSuper extends Font {
                     this._.count++;
                     this._.now.push({
                         str: "",
-                        color: ((this.data[this._.count].color === void 0) ? "white" : this.data[this._.count].color),
+                        color: ((this.data[this._.count].color === undefined) ? "white" : this.data[this._.count].color),
                         spacing_x: this.data[this._.count].spacing_x,
                         spacing_y: this.data[this._.count].spacing_y
                     })
@@ -137,7 +137,7 @@ class FontPlane extends Font {
         const charDataf = ((c) => {
             if (c == "\n" || c == " ") {
                 return this.font.space;
-            } else if (this.font[c] == void 0) {
+            } else if (this.font[c] === undefined) {
                 return this.font.space;
             } else {
                 return this.font[c];
@@ -160,7 +160,7 @@ class FontPlane extends Font {
     };
     process() {
         if (this.length_allow == this.str.length && Core.inputKeys.z) {
-            delete Global.displayStrings[name];
+            delete Global.displayStrings[this.name];
             return;
         } else if (Core.inputKeys.x) {
             this.length_allow = this.str.length
