@@ -1,4 +1,4 @@
-"use strict"
+"usestrict"
 
 _importedJsonData.fontDataStatus = {
     height_basic: 6,

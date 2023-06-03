@@ -129,20 +129,20 @@ const Core = {
 };
 
 const Game = {
-    player: { 
-        x: 0, 
+    player: {
+        x: 0,
         y: 0,
         lv: 19,
         hp: 92,
         max: 92,
         name: "chara",
-     },
+    },
     timer: 0,
     settings: {},
     scene: "menu",
     init: () => {
         Global.fontData = {
-            en:  readJsonData("fontDataEn"),
+            en: readJsonData("fontDataEn"),
             status: readJsonData("fontDataStatus"),
         }
     }
@@ -151,7 +151,7 @@ const Game = {
 let Global = {
     displayStrings: {},
     fontData: {
-        en:  {},
+        en: {},
         status: {},
     },
 }

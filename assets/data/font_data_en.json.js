@@ -68,7 +68,7 @@ _importedJsonData.fontDataEn = {
     "x": { left: 80, up: 84, width: 6, height: 7, gap: 2 },
     "y": { left: 90, up: 84, width: 6, height: 10, gap: 5 },
     "z": { left: 100, up: 84, width: 6, height: 7, gap: 2 },
-    
+
     "space": { left: 0, up: 0, width: 1, height: 1, gap: 0 },
     "irregular": { left: 150, up: 82, width: 6, height: 9, gap: 0 },
     "!": { left: 10, up: 1, width: 4, height: 10, gap: -1 },

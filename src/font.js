@@ -1,6 +1,6 @@
 "use strict"
 class Font {
-    constructor() {}
+    constructor() { }
     delete() {
         delete Global.displayStrings[this.name];
     }
@@ -58,7 +58,7 @@ class FontSuper extends Font {
                     x = 0;
                     y += this.font.height_basic + e.spacing_y;
                 } else {
-                    Core.stamp(this.font.name + "_"  + e.color,
+                    Core.stamp(this.font.name + "_" + e.color,
                         this.x + (Math.cos(d) * x - Math.sin(d) * (y + charData.gap / 2)) * size / 100,
                         this.y + (Math.sin(d) * x + Math.cos(d) * (y + charData.gap / 2)) * size / 100,
                         this.direction, size, 1, charData.left, charData.up, charData.width, charData.height
@@ -68,6 +68,7 @@ class FontSuper extends Font {
                 count++
             })
         });
+        return this;
     };
     process() {
         const input_str_length = this.data.reduce((a, c) => a + c.str.length, 0);
@@ -157,6 +158,7 @@ class FontPlane extends Font {
                 if (i + 1 < chars.length) x += (charData.width + charDataf(chars[i + 1]).width) / 2 + this.font.width_basic + this.spacing_x;
             };
         };
+        return this;
     };
     process() {
         if (this.length_allow == this.str.length && Core.inputKeys.z) {
