@@ -7,36 +7,37 @@ const Core = {
         Images: {},
         Audios: {},
         loadAssets: async function () {
-            let promises = [];
-            let index = await importJson("./assets/index.json", "assetIndex", true)
-            index.forEach((element) => {
-                promises.push(new Promise((resolve) => {
+            const index = await importJson("./assets/index.json", "assetIndex", true);
+            P.map(index, (element) => {
+                new Promise((resolve) => {
                     switch (element.type) {
                         case "image":
-                            let image = new Image();
-                            image.src = element.src;
-                            image.onload = () => {
-                                this.Images[element.name] = image;
-                                resolve();
-                            }
-                            break;
+                            {
+                                let image = new Image();
+                                image.src = element.src;
+                                image.onload = () => {
+                                    this.Images[element.name] = image;
+                                    resolve();
+                                }
+                            } break;
                         case "audio":
-                            let audio = new Audio();
-                            audio.src = element.src;
-                            audio.onload = () => {
-                                this.Audios[element.name] = audio;
-                                resolve();
-                            }
-                            break;
+                            {
+                                let audio = new Audio();
+                                audio.src = element.src;
+                                audio.onload = () => {
+                                    this.Audios[element.name] = audio;
+                                    resolve();
+                                }
+                            } break;
                         case "data":
-                            importJson(element.src, element.name).then(() => {
-                                resolve();
-                            })
-                            break;
+                            {
+                                importJson(element.src, element.name).then(() => {
+                                    resolve();
+                                })
+                            } break;
                     };
-                }));
+                });
             });
-            await Promise.all(promises);
         },
     },
     init: async function () {
