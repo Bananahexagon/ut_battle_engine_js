@@ -8,8 +8,9 @@ const Core = {
         Audios: {},
         loadAssets: async function () {
             const index = await importJson("./assets/index.json", "assetIndex", true);
-            P.map(index, (element) => {
-                new Promise((resolve) => {
+            let promises = [];
+            index.forEach(element => {
+                promises.push(new Promise(resolve => {
                     switch (element.type) {
                         case "image":
                             {
@@ -36,8 +37,9 @@ const Core = {
                                 })
                             } break;
                     };
-                });
+                }));
             });
+            await Promise.all(promises);
         },
     },
     init: async function () {
@@ -117,7 +119,7 @@ const Core = {
         x: false,
         c: false,
     },
-    stamp: function (name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
+    stamp(name, dx, dy, dd = 0, size = 100, wh = 1, sx = 0, sy = 0, sw = undefined, sh = undefined) {
         const costume = this.Asset.Images[name];
         const sw2 = sw != undefined ? sw : costume.width - sx;
         const sh2 = sh != undefined ? sh : costume.height - sy;
@@ -125,6 +127,16 @@ const Core = {
         this.ctx.translate(dx * 2, dy * 2);
         this.ctx.rotate(dd * Math.PI / 180);
         this.ctx.drawImage(costume, sx, sy, sw2, sh2, -sw2 * size * wh / 100, -sh2 * size / 100, sw2 * size * wh / 50, sh2 * size / 50);
+        this.ctx.restore();
+    },
+    rect(dx, dy, width, heigth, color, direction = 0) {
+        this.ctx.save();
+        this.ctx.translate(dx * 2 + width, dy * 2 + heigth);
+        this.ctx.rotate(direction * Math.PI / 180);
+        this.ctx.beginPath();
+        this.ctx.rect(-width, -heigth, width * 2, heigth * 2);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
         this.ctx.restore();
     }
 };

@@ -10,7 +10,7 @@ _importedJsonData.fontDataStatus = {
     "3": { left: 18, up: 7, width: 4, height: 5, gap: 0 },
     "4": { left: 24, up: 7, width: 4, height: 5, gap: 0 },
     "5": { left: 30, up: 7, width: 4, height: 5, gap: 0 },
-    "6": { left: 14, up: 7, width: 4, height: 5, gap: 0 },
+    "6": { left: 36, up: 7, width: 4, height: 5, gap: 0 },
     "7": { left: 42, up: 7, width: 4, height: 5, gap: 0 },
     "8": { left: 48, up: 7, width: 4, height: 5, gap: 0 },
     "9": { left: 54, up: 7, width: 4, height: 5, gap: 0 },
