@@ -5,6 +5,7 @@ _importedJsonData.assetIndex =
         { type: "data", name: "fontDataEn", src: "./assets/data/font_data_en.json" },
         { type: "data", name: "fontDataStatus", src: "./assets/data/font_data_status.json" },
         { type: "image", name: "soul", src: "./assets/image/soul.png" },
+        { type: "image", name: "soul_blue", src: "./assets/image/soul_blue.png" },
         { type: "image", name: "commands", src: "./assets/image/commands.png" },
         { type: "image", name: "back", src: "./assets/image/back.png" },
         { type: "image", name: "hp_kr_purple", src: "./assets/image/hp_kr_purple.png" },

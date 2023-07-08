@@ -129,12 +129,12 @@ const Core = {
         this.ctx.drawImage(costume, sx, sy, sw2, sh2, -sw2 * size * wh / 100, -sh2 * size / 100, sw2 * size * wh / 50, sh2 * size / 50);
         this.ctx.restore();
     },
-    rect(dx, dy, width, heigth, color, direction = 0) {
+    rect(dx, dy, width, heigth, color, direction = 0, type = 1) {
         this.ctx.save();
-        this.ctx.translate(dx * 2 + width, dy * 2 + heigth);
+        this.ctx.translate(dx * 2 + width * type, dy * 2 + heigth * type);
         this.ctx.rotate(direction * Math.PI / 180);
         this.ctx.beginPath();
-        this.ctx.rect(-width, -heigth, width * 2, heigth * 2);
+        this.ctx.rect(-width * type, -heigth * type, width * 2, heigth * 2);
         this.ctx.fillStyle = color;
         this.ctx.fill();
         this.ctx.restore();
@@ -150,9 +150,18 @@ const Game = {
         max: 92,
         name: "chara",
     },
+    box: {
+        center: {
+            x: 320,
+            y: 240,
+        },
+        width: 30,
+        heigth: 120,
+        direction: 0,
+    },
     timer: 0,
     settings: {},
-    scene: "menu",
+    scene: "box",
     init: () => {
         Global.fontData = {
             en: readJsonData("fontDataEn"),

@@ -7,15 +7,19 @@ function main() {
 
 function update() {
     Core.ctx.clearRect(0, 0, Core.canvas.width, Core.canvas.height);
+    if (Core.inputKeys.up) Game.player.y -= 3.5;
+    if (Core.inputKeys.down) Game.player.y += 3.5;
+    if (Core.inputKeys.left) Game.player.x -= 3.5;
+    if (Core.inputKeys.right) Game.player.x += 3.5;
+    Game.timer++;
+    box()
     Core.ctx.globalAlpha = 0.1;
     Core.stamp("back", 320, 240, 0, 100);
     Core.ctx.globalAlpha = 1;
-    if (Core.inputKeys.up) Game.player.y -= 5;
-    if (Core.inputKeys.down) Game.player.y += 5;
-    if (Core.inputKeys.left) Game.player.x -= 5;
-    if (Core.inputKeys.right) Game.player.x += 5;
-    Game.timer++;
     fontForEach();
+    Game.box.direction = Game.timer
+    Core.stamp("soul_blue", Game.box.center.x, Game.box.center.y)
+    Core.stamp("soul", Game.player.x, Game.player.y)
     hp_write(38, 413, 46, 92, "frisk", 19)
     window.requestAnimationFrame(update);
 }
