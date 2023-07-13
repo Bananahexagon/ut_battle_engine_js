@@ -8,6 +8,7 @@ _importedJsonData.assetIndex =
         { type: "image", name: "soul_blue", src: "./assets/image/soul_blue.png" },
         { type: "image", name: "commands", src: "./assets/image/commands.png" },
         { type: "image", name: "back", src: "./assets/image/back.png" },
+        { type: "image", name: "sans", src: "./assets/image/sans.png" },
         { type: "image", name: "hp_kr_purple", src: "./assets/image/hp_kr_purple.png" },
         { type: "image", name: "determination_white", src: "./assets/image/font/determination_white.png" },
         { type: "image", name: "determination_red", src: "./assets/image/font/determination_red.png" },
@@ -23,4 +24,5 @@ _importedJsonData.assetIndex =
         { type: "image", name: "hp_kr_white", src: "./assets/image/hp_kr_white.png" },
         { type: "image", name: "hp_kr_red", src: "./assets/image/hp_kr_red.png" },
         { type: "image", name: "hp_kr_purple", src: "./assets/image/hp_kr_purple.png" },
+        { type: "image", name: "bone_head_white", src: "./assets/image/bone_head_white.png" },
     ]

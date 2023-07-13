@@ -12,30 +12,27 @@ const Core = {
             index.forEach(element => {
                 promises.push(new Promise(resolve => {
                     switch (element.type) {
-                        case "image":
-                            {
-                                let image = new Image();
-                                image.src = element.src;
-                                image.onload = () => {
-                                    this.Images[element.name] = image;
-                                    resolve();
-                                }
-                            } break;
-                        case "audio":
-                            {
-                                let audio = new Audio();
-                                audio.src = element.src;
-                                audio.onload = () => {
-                                    this.Audios[element.name] = audio;
-                                    resolve();
-                                }
-                            } break;
-                        case "data":
-                            {
-                                importJson(element.src, element.name).then(() => {
-                                    resolve();
-                                })
-                            } break;
+                        case "image": {
+                            let image = new Image();
+                            image.src = element.src;
+                            image.onload = () => {
+                                this.Images[element.name] = image;
+                                resolve();
+                            }
+                        } break;
+                        case "audio": {
+                            let audio = new Audio();
+                            audio.src = element.src;
+                            audio.onload = () => {
+                                this.Audios[element.name] = audio;
+                                resolve();
+                            }
+                        } break;
+                        case "data": {
+                            importJson(element.src, element.name).then(() => {
+                                resolve();
+                            })
+                        } break;
                     };
                 }));
             });
@@ -138,10 +135,18 @@ const Core = {
         this.ctx.fillStyle = color;
         this.ctx.fill();
         this.ctx.restore();
+    },
+    drawLine(lx, ly, d, len, width, color) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(lx * 2 - len * Math.sin(d), ly * 2 + len * Math.cos(d));
+        this.ctx.lineTo(lx * 2 + len * Math.sin(d), ly * 2 - len * Math.cos(d));
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = width;
+        this.ctx.stroke();
     }
 };
 
-const Game = {
+let Game = {
     player: {
         x: 0,
         y: 0,
@@ -159,6 +164,13 @@ const Game = {
         heigth: 120,
         direction: 0,
     },
+    enemy: {
+        costume: "sans",
+        x: 320,
+        y: 240,
+        size: 200,
+        direction: 0
+    },
     timer: 0,
     settings: {},
     scene: "box",
@@ -167,6 +179,8 @@ const Game = {
             en: readJsonData("fontDataEn"),
             status: readJsonData("fontDataStatus"),
         }
+    },
+    game_option: {
     }
 }
 
@@ -175,5 +189,8 @@ let Global = {
     fontData: {
         en: {},
         status: {},
+    },
+    enemyAttacks: {
+
     },
 }

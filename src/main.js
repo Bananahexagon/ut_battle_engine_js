@@ -7,20 +7,23 @@ function main() {
 
 function update() {
     Core.ctx.clearRect(0, 0, Core.canvas.width, Core.canvas.height);
-    if (Core.inputKeys.up) Game.player.y -= 3.5;
-    if (Core.inputKeys.down) Game.player.y += 3.5;
-    if (Core.inputKeys.left) Game.player.x -= 3.5;
-    if (Core.inputKeys.right) Game.player.x += 3.5;
+    if (Core.inputKeys.up) Game.player.y -= 3;
+    if (Core.inputKeys.down) Game.player.y += 3;
+    if (Core.inputKeys.left) Game.player.x -= 3;
+    if (Core.inputKeys.right) Game.player.x += 3;
     Game.timer++;
-    box()
-    Core.ctx.globalAlpha = 0.1;
-    Core.stamp("back", 320, 240, 0, 100);
-    Core.ctx.globalAlpha = 1;
+    Game.box.direction = Game.timer;
+    const box = boxGet();
+    box.forEach(e => {
+        e.drawWhite();
+        [Game.player.x, Game.player.y] = e.calc(Game.player.x, Game.player.y);
+    })
+    box.forEach(e => e.drawBlack())
+    Core.stamp(Game.enemy.costume, Game.enemy.x, Game.enemy.y)
     fontForEach();
-    Game.box.direction = Game.timer
     Core.stamp("soul_blue", Game.box.center.x, Game.box.center.y)
     Core.stamp("soul", Game.player.x, Game.player.y)
-    hp_write(38, 413, 46, 92, "frisk", 19)
+    hp_write(38, 413, 46, 92, "frisk", 19);
     window.requestAnimationFrame(update);
 }
 
