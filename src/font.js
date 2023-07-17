@@ -176,7 +176,7 @@ class FontPlane extends Font {
 };
 
 function fontForEach() {
-    for (let name in Global.displayStrings) {
+    for (const name in Global.displayStrings) {
         Global.displayStrings[name].process()
     };
 };

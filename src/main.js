@@ -18,11 +18,12 @@ function update() {
         e.drawWhite();
         [Game.player.x, Game.player.y] = e.calc(Game.player.x, Game.player.y);
     })
-    box.forEach(e => e.drawBlack())
-    Core.stamp(Game.enemy.costume, Game.enemy.x, Game.enemy.y)
+    box.forEach(e => e.drawBlack());
+    Core.stamp(Game.enemy.costume, Game.enemy.x, Game.enemy.y);
     fontForEach();
-    Core.stamp("soul_blue", Game.box.center.x, Game.box.center.y)
-    Core.stamp("soul", Game.player.x, Game.player.y)
+    normalBoneForEach()
+    Core.stamp("soul_blue", Game.box.center.x, Game.box.center.y);
+    Core.stamp("soul", Game.player.x, Game.player.y);
     hp_write(38, 413, 46, 92, "frisk", 19);
     window.requestAnimationFrame(update);
 }

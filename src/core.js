@@ -136,10 +136,18 @@ const Core = {
         this.ctx.fill();
         this.ctx.restore();
     },
-    drawLine(lx, ly, d, len, width, color) {
+    drawLine(lx, ly, d, len, width, color, type = 0) {
         this.ctx.beginPath();
-        this.ctx.moveTo(lx * 2 - len * Math.sin(d), ly * 2 + len * Math.cos(d));
-        this.ctx.lineTo(lx * 2 + len * Math.sin(d), ly * 2 - len * Math.cos(d));
+        switch (type) {
+            case 0: {
+                this.ctx.moveTo(lx * 2 - len * Math.sin(d), ly * 2 + len * Math.cos(d));
+                this.ctx.lineTo(lx * 2 + len * Math.sin(d), ly * 2 - len * Math.cos(d));
+            } break;
+            case 1: {
+                this.ctx.moveTo(lx * 2, ly * 2);
+                this.ctx.lineTo(lx * 2 + len * Math.sin(d) * 2, ly * 2 - len * Math.cos(d) * 2);
+            } break;
+        }
         this.ctx.strokeStyle = color;
         this.ctx.lineWidth = width;
         this.ctx.stroke();
