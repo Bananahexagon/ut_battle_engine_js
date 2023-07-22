@@ -6,20 +6,20 @@ window.onload = async () => {
     main();
 }
 
-let _importedJsonData = {};
-let _importedJsFiles = {
+let _importedJSonData = {};
+let _importedJSFiles = {
     "./src/index.js": true,
 };
 
-function importJs(src) {
-    if (!_importedJsFiles[src]) {
+function importJS(src) {
+    if (!_importedJSFiles[src]) {
         return new Promise((resolve, reject) => {
             const head = document.getElementsByTagName("head")[0];
             let element = document.createElement("script");
             element.src = src;
             head.appendChild(element)
             element.onload = () => {
-                _importedJsFiles[src] = true;
+                _importedJSFiles[src] = true;
                 resolve(element)
             }
             element.onerror = (e) => reject(e);
@@ -27,7 +27,7 @@ function importJs(src) {
     }
 }
 
-function importJson(src, name, opt = false) {
+function importJSon(src, name, opt = false) {
     return new Promise((resolve, reject) => {
         const head = document.getElementsByTagName("head")[0];
         let element = document.createElement("script");
@@ -35,24 +35,24 @@ function importJson(src, name, opt = false) {
         head.appendChild(element);
         element.onload = () => {
             element.remove();
-            let data = opt ? readJsonData(name) : _importedJsonData[name];
+            let data = opt ? readJSonData(name) : _importedJSonData[name];
             resolve(data);
         };
         element.onerror = (e) => reject(e);
     })
 }
 
-function readJsonData(name) {
-    let data = structuredClone(_importedJsonData[name]);
-    delete _importedJsonData[name];
+function readJSonData(name) {
+    let data = structuredClone(_importedJSonData[name]);
+    delete _importedJSonData[name];
     return data
 }
 
 async function load() {
-    let a = await importJson("./index.json", "index", true);
+    let a = await importJSon("./index.json", "index", true);
     let promises = [];
     a.forEach((e) => {
-        promises.push(importJs(e));
+        promises.push(importJS(e));
     });
     await Promise.all(promises)
 

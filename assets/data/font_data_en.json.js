@@ -1,6 +1,6 @@
 "use strict"
 
-_importedJsonData.fontDataEn = {
+_importedJSonData.fontDataEn = {
     height_basic: 15,
     width_basic: 2,
     name: "determination",

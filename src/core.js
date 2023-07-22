@@ -7,7 +7,7 @@ const Core = {
         Images: {},
         Audios: {},
         loadAssets: async function () {
-            const index = await importJson("./assets/index.json", "assetIndex", true);
+            const index = await importJSon("./assets/index.json", "assetIndex", true);
             let promises = [];
             index.forEach(element => {
                 promises.push(new Promise(resolve => {
@@ -29,7 +29,7 @@ const Core = {
                             }
                         } break;
                         case "data": {
-                            importJson(element.src, element.name).then(() => {
+                            importJSon(element.src, element.name).then(() => {
                                 resolve();
                             })
                         } break;
@@ -184,8 +184,8 @@ let Game = {
     scene: "box",
     init: () => {
         Global.fontData = {
-            en: readJsonData("fontDataEn"),
-            status: readJsonData("fontDataStatus"),
+            en: readJSonData("fontDataEn"),
+            status: readJSonData("fontDataStatus"),
         }
     },
     game_option: {

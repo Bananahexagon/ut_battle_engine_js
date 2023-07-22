@@ -1,5 +1,4 @@
-Global.enemyAttacks.normalBone =
-    {};
+Global.enemyAttacks.normalBone = {};
 
 class normalBone {
     static autoID = 0;

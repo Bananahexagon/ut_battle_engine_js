@@ -1,6 +1,6 @@
 "use strict"
 
-_importedJsonData.assetIndex =
+_importedJSonData.assetIndex =
     [
         { type: "data", name: "fontDataEn", src: "./assets/data/font_data_en.json" },
         { type: "data", name: "fontDataStatus", src: "./assets/data/font_data_status.json" },

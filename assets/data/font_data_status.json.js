@@ -1,6 +1,6 @@
 "usestrict"
 
-_importedJsonData.fontDataStatus =
+_importedJSonData.fontDataStatus =
 {
     height_basic: 6,
     width_basic: 1,
